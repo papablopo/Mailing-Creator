@@ -1,5 +1,6 @@
 # Mailing-Creator
 Aurelia Mailing Creator
+Vtex Ready
 
 Build in nodejs and aurelia framework
 
