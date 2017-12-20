@@ -1,0 +1,20 @@
+<template>
+    <td style="padding: 10px; text-align: center">
+                        
+                        <ul>
+                          <li repeat.for="todo of todos">
+                         <a href="${todo.path}" class="img-ttl" target="_blank" style="text-decoration: none; height: 155px">
+                          <img src="${todo.image}" aria-hidden="true" width="170" height="170" alt="alt_text" border="0" class="fluid" style="height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+                        </a>
+                        <a href="${todo.path}" target="_blank" style="text-decoration: none;">
+                          ${todo.name}
+                        </a>
+                        <a href="${todo.path}" target="_blank" style="text-decoration: none;">
+                          <img src="http://riseventures.org/pruebas/mailing/ya-esta/images/1-btm.png" aria-hidden="true" width="170" height="22" alt="alt_text" border="0" class="fluid" style="height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+                        </a>
+                          <button click.trigger="removeTodo(todo)">Remove</button>
+                        </li>    
+                      </ul>                     
+                        
+    </td>
+</template>

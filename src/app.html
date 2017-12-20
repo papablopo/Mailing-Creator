@@ -1,0 +1,467 @@
+    
+<template>
+  <html lang="en">
+<head>
+	<meta charset="utf-8"> <!-- utf-8 works for most cases -->
+	<meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
+	<title></title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+	<!-- Web Font / @font-face : BEGIN -->
+	<!-- NOTE: If web fonts are not required, lines 10 - 27 can be safely removed. -->
+
+	<!-- Desktop Outlook chokes on web font references and defaults to Times New Roman, so we force a safe fallback font. -->
+	<!--[if mso]>
+		<style>
+			* {
+				font-family: sans-serif !important;
+			}
+		</style>
+	<![endif]-->
+
+	<!-- All other clients get the webfont reference; some will render the font and others will silently fail to the fallbacks. More on that here: http://stylecampaign.com/blog/2015/02/webfont-support-in-email/ -->
+	<!--[if !mso]><!-->
+		<!-- insert web font reference, eg: <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'> -->
+	<!--<![endif]-->
+
+	<!-- Web Font / @font-face : END -->
+
+	<!-- CSS Reset -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style id="main">
+
+		/* What it does: Remove spaces around the email design added by some email clients. */
+		/* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+        html,
+        body {
+            font-family: sans-serif;
+	        margin: 0 auto !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+        a{
+            font-family: sans-serif;
+            text-decoration:  none;
+            color: #555555;
+        }
+        a:link    {
+
+          text-decoration:  none;
+          color: #555555;
+
+          } 
+        a:visited {
+            text-decoration:  none;
+
+          } 
+        a:hover   {
+          
+          text-decoration:  none;
+          } 
+        a:active  {
+        
+          text-decoration:  none;
+          color: #555555;
+
+          } 
+
+        /* What it does: Stops email clients resizing small text. */
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* What it does: Centers email on Android 4.4 */
+        div[style*="margin: 16px 0"] {
+            margin:0 !important;
+        }
+
+        /* What it does: Stops Outlook from adding extra spacing to tables. */
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+            font-family: sans-serif;
+        }
+
+        /* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin: 0 auto !important;
+            font-family: sans-serif;
+        }
+        table table table {
+            table-layout: auto;
+        }
+
+        /* What it does: Uses a better rendering method when resizing images in IE. */
+        img {
+            -ms-interpolation-mode:bicubic;
+        }
+
+        /* What it does: A work-around for iOS meddling in triggered links. */
+        *[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+
+        /* What it does: A work-around for Gmail meddling in triggered links. */
+        .x-gmail-data-detectors,
+        .x-gmail-data-detectors *,
+        .aBn {
+            border-bottom: 0 !important;
+        }
+
+        /* What it does: Prevents Gmail from displaying an download button on large, non-linked images. */
+        .a6S {
+	        display: none !important;
+	        opacity: 0.01 !important;
+        }
+        /* If the above doesn't work, add a .g-img class to any image in question. */
+        img.g-img + div {
+	        display:none !important;
+	   	}
+
+        /* What it does: Prevents underlining the button text in Windows 10 */
+        .button-link {
+            text-decoration: none !important;
+        }
+
+        .logo {
+            margin: 0 8px !important;
+        }
+        .img-ttl{
+            display: block;
+        }
+
+    .tbody {
+    display:inline-block;/* whatever, just  reset table layout display to go further */
+    }
+
+.td {
+  display: block;
+  width: 100% !important;
+  float: left !important;
+   font-family: sans-serif;
+  /*flex:1 /* to evenly distributs flex elements */
+}
+
+.h4{
+    color: #ffa500 !important;
+    font-size: 18px !important;
+     font-family: sans-serif;
+}
+
+        /* What it does: Hover styles for buttons */
+        .button-td,
+        .button-a {
+            transition: all 100ms ease-in;
+        }
+        .button-td:hover,
+        .button-a:hover {
+            text-decoration: none;
+            background: #555555 !important;
+            font-family: sans-serif;
+            /*border-color: #555555 !important;*/
+        }
+span{
+     font-family: sans-serifi;
+}
+       
+
+.comprarbtn {
+    font-family: sans-serif !important;;
+  -webkit-border-radius: 1px !important;
+  -moz-border-radius: 1px !important;
+  border-radius: 2px !important;
+  -webkit-box-shadow: 0px 1px 3px #666666 !important;
+  -moz-box-shadow: 0px 1px 3px #666666 !important;
+  box-shadow: 0px 1px 3px #666666 !important;
+  
+  color: #ffffff !important;
+  font-size: 14px !important;
+  background: #d93434 !important;
+  padding: 5px 10px 5px 10px !important;
+  text-decoration: none !important;
+  float: center !important;
+}
+
+.comprarbtn:hover {
+  background: #fcb63c !important;
+  text-decoration: none !important;
+}
+ /* Media Queries */
+       @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+            .email-container {
+                width: 100% !important;
+                margin: auto !important;
+            }
+
+            /* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
+            .fluid {
+                max-width: 100% !important;
+                height: auto !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+
+            }
+
+            /* What it does: Forces table cells into full-width rows. */
+            .stack-column,
+            .stack-column-center {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                direction: ltr !important;
+            }
+            /* And center justify these ones. */
+            .stack-column-center {
+                text-align: center !important;
+                width:100%;
+
+            }
+
+            /* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+            .center-on-narrow {
+                text-align: center !important;
+                display: block !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                float: none !important;
+            }
+            table.center-on-narrow {
+                display: inline-block !important;
+            }
+
+            
+        }
+
+          /* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
+        /* Create one of these media queries for each additional viewport size you'd like to fix */
+        /* Thanks to Eric Lepetit @ericlepetitsf) for help troubleshooting */
+
+        @media only screen and (min-device-width: 720px){
+             .email-container {
+                min-width: 720px !important;
+                display:flex;
+                flex-flow: row wrap;
+            }
+            .td {
+              display: block;
+              width: 100% !important;
+              float: left !important;
+               font-family: sans-serif;
+              /*flex:1 /* to evenly distributs flex elements */
+            }
+
+
+        }
+
+        @media only screen and (min-device-width: 375px) { /* iPhone 6 and 6+ */
+            .email-container {
+                min-width: 375px !important;
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+<div style="background-color:#F7F7F7; width:100%; align-content:center;">
+    <div class="container">
+   <div class="row">
+        <div class="alert alert-warning">
+            <h2>YaEsta Mailing Template Creator</h2>
+        <p class="lead">
+            Version 1.0.9<br/>
+        </p>
+            <h4>Modulo para la creacion automatica de templates para mailing</h4>
+            
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-8">
+        <h4 class="page-header">LINKS VERSION WEB / UNSUSCRIBE</h4>
+
+                <form role="form">
+                    <div class="form-group float-label-control">
+                        <input type="text" class="form-control" placeholder="Link para ver el mail" value.bind="todoVerMas">
+                    </div>
+                        <div class="form-group float-label-control">
+                        <input type="text" class="form-control" placeholder="Link Unsuscribe" value.bind="todoUnsuscribe">
+                    </div>
+                </form>
+
+                <h4 class="page-header">UTMS PARA URLS DE PRODUCTOS</h4>
+                <form role="form">
+                    <div class="form-group float-label-control">
+                        
+                        <input type="text" class="form-control" placeholder="Campaign" value.bind="todoSkuCampaign">
+                    </div>
+                    <div class="form-group float-label-control">
+                        
+                        <input type="text" class="form-control" placeholder="Source" value.bind="todoSkuSource">
+                    </div>
+                    <div class="form-group float-label-control">
+                        
+                        <input type="text" placeholder="Medium"  class="form-control" value.bind="todoSkuMedium">
+                    </div>
+                </form>
+
+
+                <h4 class="page-header">CONFIGURACION BANNER PRINCIPAL</h4>
+                <form role="form">
+                    <div class="form-group float-label-control label-bottom">
+                        <input type="text" class="form-control" placeholder="Url imagen del banner" value.bind="todoImageBanner">
+                        
+                    </div>
+                    <div class="form-group float-label-control label-bottom">
+                        <input type="text" class="form-control" placeholder="Url Landing del banner" value.bind="todoUrlBanner">
+                        <button id="addutm" name="addutm"  class="btn btn-primary btn-md" click.delegate="urlUtmBanner()">Agregar</button>
+                    </div>
+                </form>
+
+
+                <h4 class="page-header">CONFIGURACION SKUS</h4>
+                <form role="form">
+                    <div class="form-group float-label-control">
+                        <input id="skuid" class="form-control" placeholder="Ingresa el sku del producto" value.bind="todoDescription" >
+                        <button id="addsku" name="addsku"  class="btn btn-primary btn-md" click.delegate="getDataSku(todoDescription)">Agregar</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            INDICACIONES
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>Ingresa los valores para los utms de la campania</li>
+                            <li>Ingresa la url de la imagen del banner principal</li>
+                            <li>Ingresa la url landing donde debe direccionar cuando se de click en el banner principal</li>
+                            <li>Finalmente ingresa 1 a 1 los sku de los producots a enviar</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+                <form role="form">
+                    <div class="form-group float-label-control label-bottom">
+                  <button click.trigger="showDialog()" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+                    Obtener codigo del template
+                </button>
+                    </div>
+                </form>
+    
+
+</div>
+    
+
+</div>
+<br>
+<br>    
+<div id="template">
+<require from="./header.html"></require>
+<div as-element="header" vermail.bind="todoVerMas" > 
+
+</div>
+<table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-container">
+   <tbody>
+    <tr>
+        <td bgcolor="#f1f1ef" style="padding:0 25px;width: 100%;font-size: 10px; font-family: sans-serif; line-height:18px; text-align: left; color: #1a212a;" class="x-gmail-data-detectors">
+         <a href="${todoUrlBanner}" target="_blank" style="text-decoration: none;">
+        <img style="width:100%;max-width:600px;height:auto;background:#ddd;" src="${todoImageBanner}"/>
+         </a>
+        </td>
+    </tr>
+   </tbody>
+</table>
+<br>
+          <table role="presentation" width="600" aria-hidden="true" cellspacing="0" cellpadding="0" border="0">
+            <tbody class="tbody" style="display:inline-block;">
+                <tr class="tr">              
+                <td repeat.for="todo of todos"    class="td" style="display: block;float: left !important;">
+                  <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td class="stack-column-center"><!--  here goes this width="33.33%"  -->
+                            <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" style=" table-layout: auto;">
+                                    <tr style="border-style: solid; border-width: 1px; padding: 5px;">
+                                        <td style="padding: 5px; text-align: center;  display: block;  float: left !important;">                                       
+                                         <a href="${todo.path}" target="_blank" class="img-ttl" style="text-decoration: none; height: 140px">
+                                             <img src="${todo.image}"  aria-hidden="true" width="170" height="170" alt="alt_text" border="0" class="fluid" style="padding:3px;height: auto; background: #dddddd; font-family: sans-serif; font-size: 22px; line-height: 17px; color: #555555; border"/>
+                                            </a>
+                                        </td>   
+                                         <td style="padding: 15px 12px 5px 1px; text-align: center">
+                                          <a href="${todo.path}" target="_blank"> <h4 class="h4">  ${todo.name} </h4></a>
+                                              <span style="text-decoration: line-through!important; font-size: 15px!important;color: #555!important; padding-bottom:1em;">$ ${todo.listprice}</span> 
+                                              <br>
+                                              <span style="font-weight: 600!important; padding-right:1em; padding-bottom:2em; padding-top:1px;font-family: sans-serif; padding:3px;font-size: 19px; border-width:1.3px;border-style:groove;">  $ ${todo.price} </span>  
+                                        </td>                                   
+                                    </tr>    
+                                  <!--   <tr>
+                                         <td style="padding: 15px 1px 5px 1px; text-align: center">
+                                          <a href="${todo.path}" target="_blank"> <h4 class="h4">  ${todo.name} </h4></a>
+                                              <span style="font-weight: 400!important; padding-right:1em; padding-bottom:2em; padding-top:1px;font-family: sans-serif;">$ ${todo.price}</span>  
+                                              <span style="text-decoration: line-through!important; font-size: 15px!important;color: #555!important; padding-bottom:1em;">$ ${todo.listprice}</span>  
+                                        </td>
+                                    </tr> -->
+                                    <tr> <td style="padding: 15px; text-align: center"><a href="${todo.path}" target="_blank" class="comprarbtn" style="-webkit-border-radius: 1px !important; -moz-border-radius: 1px !important; -webkit-box-shadow: 0px 5px 3px #666666 !important;-moz-box-shadow: 0px 1px 3px #666666 !important;box-shadow: 0px 1px 3px #666666 !important;color: #ffffff !important;font-size: 18px !important;background: #f0ad4e !important;padding: 5px 10px 5px 10px !important;text-decoration: none !important;float: center !important;">Comprar</a></td></tr>
+                                     <div id="botondel">   
+                                     <button name="btnremove" click.trigger="removeTodo(todo)">Remove</button>
+                                     </div>
+                            </table>               
+                        </td>    
+                    </tr>
+                  </table>
+                </td>
+             </tr >
+            
+            </tbody>  
+           </table>
+    <!--<ul>
+      <li repeat.for="todo of todos">
+      <input type="checkbox" checked.bind="todo.done">
+      <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}">
+        ${todo.description}
+      </span>
+       <span >
+        ${todo.price}
+      </span>
+        <a href="${todo.path}" target="_blank"><img src="${todo.image}"/></a>
+      <button click.trigger="removeTodo(todo)">Remove</button>
+    </li>    
+  </ul>-->
+   <require from="./footer.html"></require>
+   <div as-element="footer" unsuscribe.bind="todoUnsuscribe">
+ > 
+  </div> 
+</div>
+   </div>
+
+
+   
+  <require from="./confirm.html" ></require>
+   <div as-element="confirm" message.bind="todoMessage"> 
+       
+</div>
+</body>  
+
+</template>
